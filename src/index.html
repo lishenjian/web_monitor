@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>web-monitor</title>
+</head>
+<body>
+  <div id="container">
+    <div class="content">
+      <input type="button" value="点击js报错" onclick="errorClick()">
+      <input type="button" value="点击Promise报错" onclick="promiseClick()">
+    </div>
+  </div>
+  <script>
+    function errorClick() {
+      try {
+        window.errorVlaue.a = 'error'
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    function promiseClick() {
+    }
+  </script>
+</body>
+</html>
