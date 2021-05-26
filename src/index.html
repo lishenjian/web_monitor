@@ -14,11 +14,13 @@
   </div>
   <script>
     function errorClick() {
-      try {
-        window.errorVlaue.a = 'error'
-      } catch (error) {
-        console.log(error)
-      }
+      //如果捕获错误，error 事件就监听不到
+      // try {
+      //   window.errorVlaue.a = 'error'
+      // } catch (error) {
+      //   console.log(error)
+      // }
+      window.errorVlaue.a = 'mesg'
     }
     function promiseClick() {
     }
