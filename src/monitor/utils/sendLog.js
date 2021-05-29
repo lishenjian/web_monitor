@@ -5,7 +5,7 @@ console.log(userAgent);
 function getExtraData() {
     return {
         title: document.title,
-        url: location.url,
+        url: location.href,
         timestamp: Date.now(),
         userAgent: userAgent.parse(navigator.userAgent),         //用户浏览器类型
     }

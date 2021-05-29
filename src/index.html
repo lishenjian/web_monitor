@@ -9,7 +9,7 @@
   <div id="container">
     <div class="content">
       <input type="button" value="点击js报错" onclick="errorClick()">
-      <input type="button" value="点击Promise报错" onclick="promiseClick()">
+      <input type="button" value="点击Promise报错" onclick="promiseErrorClick()">
     </div>
   </div>
   <script>
@@ -22,7 +22,13 @@
       // }
       window.errorVlaue.a = 'mesg'
     }
-    function promiseClick() {
+    function promiseErrorClick() {
+      new Promise(function(resolve, reject) {
+        // window.errorVlaue.a = 'error';     // unhandledrejection 事件的reason 信息为对象
+        reject('error')                       // unhandledrejection 事件的reason 信息为error 字符串
+      }).then(res=>{
+        console.log(res)
+      })
     }
   </script>
 </body>

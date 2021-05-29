@@ -7,9 +7,6 @@ export function injectJsError() {
   window.addEventListener('error', function(e) {
     let lastEvent = getLastEvent();
     let sendLog = {
-      title: "前端监控系统",            //页面标题
-      url: "http://localhost:8080/",    //页面url
-      timestamp: "",                    //访问时间戳
       kind: "stability",                //大类
       type: "error",                    //小类
       errorType: "jsError",             //错误类型
@@ -19,7 +16,45 @@ export function injectJsError() {
       stack: getStack(e.error.stack),                         //堆栈信息
       selector: lastEvent ? getSelector(lastEvent.path):''         //选择器
     }
-    console.log(sendLog);
+    Tracker.send(sendLog);
+  })
+
+  //监听 promise 错误
+  window.addEventListener('unhandledrejection', (event)=>{
+    console.log(event)
+    let lastEvent = getLastEvent();
+    let filename;
+    let line = 0;
+    let column = 0;
+    let stack;
+    let reason = event.reason;
+    let message;
+    
+    if(typeof reason === 'string') {
+      message = reason;
+      //promise reject 错误没有 stack 和 filename
+      filename = location.href;
+    }else if(typeof reason === 'object') {
+      if(reason.stack) {
+        let matchResult = reason.stack.match(/at\s+(.+):(\d+):(\d+)/);
+        console.log(matchResult);
+        filename = matchResult[1];
+        line = matchResult[2];
+        column = matchResult[3];
+      }
+      message = reason.message;
+      stack = getStack(reason.stack)
+    }
+    let sendLog = {
+      kind: "stability",                //大类
+      type: "error",                    //小类
+      errorType: "promiseError",             //错误类型
+      message: message,                      //类型详情
+      filename: filename,                     //访问的文件名
+      position: `${line}:${column}`,                     //行列信息
+      stack: stack,                         //堆栈信息
+      selector: lastEvent ? getSelector(lastEvent.path):''         //选择器
+    }
     Tracker.send(sendLog);
   })
 }
