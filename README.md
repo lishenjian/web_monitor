@@ -131,5 +131,24 @@ plugins: [
 }
 ```
 
+* 接口 error
+
+```js
+{
+  "title": "前端监控系统",            	//页面标题
+  "url": "http://localhost:8080/",    	//页面url
+  "timestamp": "",                    	//访问时间戳
+  "userAtgent": "chrome",            	//用户浏览器类型
+  "kind": "stability",               	//大类
+  "type": "error",                    	//小类
+  "errorType": "ajax",        			//错误类型
+  "pathname": "",                      	//路径
+  "status": "",                     	//状态
+  "duration": "7",                  	//持续时间
+  "response": "",                       //响应信息
+  "params": ""                      	//请求参数
+}
+```
+
 
 
