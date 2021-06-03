@@ -3,26 +3,35 @@
 ## 前端监控目标
 ### 稳定性
 * js 错误（未捕获的错误）
+  
   > JS执行错误或者 promise 异常
 * 资源异常
+  
   > script、link等资源加载异常
 * 接口错误
+  
   > ajax或fetch请求接口异常
 * 白瓶
+  
   > 页面空白
 ### 用户体验
 指各个阶段的加载时间
 * TTFB（time to first byte）首字节时间
+  
   > 指浏览器发起第一个请求到数据返回第一个字节所消耗的时间，这个时间包含了网络请求时间、后端处理时间
 * FP（First paint）首次绘制时间
+  
   > 首次绘制包含了任何用户自定义的背景绘制，它是将第一个像素点绘制到屏幕的时间
 * FCP（First content paint）首次内容绘制
+  
   > 首次内容绘制是浏览器将第一个DOM渲染到屏幕的时间，可以是任何文本、图像、SVG等的时间
 * FMP（First Meaningful Paint）首次有意义绘制
+  
   > 首次有意义绘制是页面可用性的量度标准
 * FID（First inlut delay）首次输入延迟
  > 用户首次和页面交互到页面响应交互的时间
 * 卡顿 
+  
   > 超过50ms 的长任务
 
 
@@ -57,9 +66,34 @@
   > user-agent npm 包 是用作把浏览器的UserAgent变成一个对象
   > webpack 5* + webpack-cli 4*   webpack-dev-server 配置 webpack serve 启动命令
 ### 错误分类
-* js 错误
-* promise 异常
-* 资源异常
+#### js 错误
+
+
+
+#### promise 异常
+
+
+
+####  资源异常
+
+处理 script 脚本时遇到，error 事件没有监听到的情况，后来发现 使用 webpack 打包使用  HtmlWebpackPlugin  时配置问题导致
+
+```javascript
+plugins: [
+    new HtmlWebpackPlugin({
+      template: './src/index.html',
+      inject: 'head'	//此处会将 script 会插入 head 头部，然而 script 会添加 defer 属性，会取消 阻塞
+    })
+ ]
+```
+
+
+
+#### 接口异常
+
+
+
+
 
 ### 异常错误 数据结构
 * jsError
@@ -96,6 +130,25 @@
   "selector": ""                      //选择器
 }
 ```
+* 接口 error
+
+```js
+{
+  "title": "前端监控系统",            	//页面标题
+  "url": "http://localhost:8080/",    	//页面url
+  "timestamp": "",                    	//访问时间戳
+  "userAtgent": "chrome",            	//用户浏览器类型
+  "kind": "stability",               	//大类
+  "type": "error",                    	//小类
+  "errorType": "ajax",        			//错误类型
+  "pathname": "",                      	//路径
+  "status": "",                     	//状态
+  "duration": "7",                  	//持续时间
+  "response": "",                       //响应信息
+  "params": ""                      	//请求参数
+}
+```
+
 ## 白屏
 
 ### 数据结构
@@ -119,3 +172,8 @@
 * innerHeight: 窗口的内部高度（布局视口）的高度
 * layout_viewpoint 
 * elementsFromPoint方法可以获取到当前视口内指定坐标处，由里到外排列的所有元素
+
+
+
+
+

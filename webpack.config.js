@@ -11,6 +11,13 @@ module.exports = {
   },
   devServer: {
     contentBase: path.resolve(__dirname, 'dist'), //静态文件根目录
+    //before 内部启动 express 服务器
+    before(router) {
+      router.get('/success', function(req, res){
+        res.json({id: 1})
+        //res.sendStatus(500) 
+      })
+    }
   },
   plugins: [
     new HtmlWebpackPlugin({

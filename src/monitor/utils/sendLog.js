@@ -1,6 +1,5 @@
 //浏览器检测
 let userAgent = require('user-agent');
-console.log(userAgent);
 // 获取浏览器及用户信息
 function getExtraData() {
     return {

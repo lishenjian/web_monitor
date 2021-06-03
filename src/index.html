@@ -10,6 +10,9 @@
     <div class="content">
       <input type="button" value="点击js报错" onclick="errorClick()">
       <input type="button" value="点击Promise报错" onclick="promiseErrorClick()">
+      <input type="button" value="ajax成功请求" onclick="sendSuccess()">
+      <input type="button" value="ajax失败请求" onclick="sendError()">
+      <input type="button" value="ajax abort" onclick="sendAbort()">
     </div>
   </div>
   <script>
@@ -30,6 +33,41 @@
         console.log(res)
       })
     }
+    // window.addEventListener("error", (e)=> {
+    //   console.log(e);
+    // }, true)
+
+    function sendSuccess() {
+      let xhr = new XMLHttpRequest;
+      xhr.open('GET', '/success', true);
+      xhr.responseType = 'json';
+      xhr.onload = function() {
+        console.log(xhr.response);
+      }
+      xhr.send();
+    }
+    function sendError() {
+      let xhr = new XMLHttpRequest;
+      xhr.open('GET', 'https://somewhere.org/i-dont-exist', true);
+      xhr.responseType = 'json';
+      xhr.onerror = function(error) {
+        console.log(error);
+      }
+      xhr.send("name=ceshi"); 
+    }
+    function sendAbort() {
+      let xhr = new XMLHttpRequest;
+      xhr.open('GET', 'https://mdn.mozillademos.org/files/16553/DgsZYJNXcAIPwzy.jpg', true);
+      xhr.responseType = 'json';
+      xhr.onabort = function(abort) {
+        console.log(abort);
+      }
+      xhr.send("type=abort"); 
+      xhr.abort();
+    }
   </script>
+  
 </body>
+<!-- defer 属性 延迟加载 -->
+<script defer src="/someError.js"></script>
 </html>
