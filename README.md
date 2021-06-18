@@ -136,7 +136,6 @@ plugins: [
   "selector": ""                      //选择器
 }
 ```
-
 * 接口 error
 
 ```js
@@ -155,6 +154,32 @@ plugins: [
   "params": ""                      	//请求参数
 }
 ```
+
+## 白屏
+
+### 数据结构
+```js
+{
+  "title": "前端监控系统",            //页面标题
+  "url": "http://localhost:8080/",    //页面url
+  "timestamp": "",                    //访问时间戳
+  "userAtgent": "chrome",             //用户浏览器类型
+  "kind": "stability",                //大类
+  "type": "blank",                    //小类
+  "emptyPoints": "0",        //空白点
+  "screen": "2049x1152",              //分辨率
+  "viewPoints": "2048x994",           //视口
+  "selector": ""                      //选择器
+}
+```
+### 实现
+* screen: 返回当前 window 的 screen 对象，返回当前渲染窗口中和屏幕有关得到属性
+* innerWidth: 只读的 Window 属性 innerWidth 返回以像素为单位的窗口内部宽度
+* innerHeight: 窗口的内部高度（布局视口）的高度
+* layout_viewpoint 
+* elementsFromPoint方法可以获取到当前视口内指定坐标处，由里到外排列的所有元素
+
+
 
 
 
