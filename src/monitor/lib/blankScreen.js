@@ -1,5 +1,6 @@
 import Tracker from '../utils/sendLog';
 import getSelector from  '../utils/getSelector';
+import onload from  '../utils/onload';
 
 export function blankScreen() {
   let wrapperEl = ['html', 'body', '#container', '.content'];
@@ -19,22 +20,24 @@ export function blankScreen() {
       emptyPoints++;
     }
   }
-  for(let i = 0; i < 9; i++) {
-    let xLineEl = document.elementsFromPoint(window.innerWidth * i/10, window.innerHeight/2);
-    let yLineEl = document.elementsFromPoint(window.innerWidth/2, window.innerHeight*i/10)
-    isWrapper(xLineEl[0]);
-    isWrapper(yLineEl[0]);
-  }
-  //如果大于 8 个
-  if(emptyPoints > 8) {
-    let centerEl = document.elementsFromPoint(window.innerWidth/2, window.innerHeight/2)
-    Tracker.send({
-      kind: 'stability',
-      type: 'blank',
-      emptyPoints: emptyPoints,
-      screen: window.screen.width + 'X' + window.screen.height,
-      viewPoint: window.innerWidth+ 'X' + window.innerHeight,
-      selector: getSelector(centerEl[0])
-    })
-  }
+  onload(function(){
+    for(let i = 0; i < 9; i++) {
+      let xLineEl = document.elementsFromPoint(window.innerWidth * i/10, window.innerHeight/2);
+      let yLineEl = document.elementsFromPoint(window.innerWidth/2, window.innerHeight*i/10)
+      isWrapper(xLineEl[0]);
+      isWrapper(yLineEl[0]);
+    }
+    //如果大于 8 个
+    if(emptyPoints > 8) {
+      let centerEl = document.elementsFromPoint(window.innerWidth/2, window.innerHeight/2)
+      Tracker.send({
+        kind: 'stability',
+        type: 'blank',
+        emptyPoints: emptyPoints,
+        screen: window.screen.width + 'X' + window.screen.height,
+        viewPoint: window.innerWidth+ 'X' + window.innerHeight,
+        selector: getSelector(centerEl[0])
+      })
+    }
+  })
 }
