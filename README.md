@@ -275,3 +275,32 @@ plugins: [
 * L（onLoad）当依赖的资源全部加载完毕后才会触发
 * TTI（Time to Interactive） 用于标记引用已进行视觉渲染并可能靠响应用户输入的时间点
 * FID（First inlut delay）首次输入延迟。用户首次和页面交互（单击链接，点击按钮等）到页面响应交互的时间
+
+
+
+## 卡顿
+
+统计卡顿/pv/uv/页面停留时间
+
+## PV
+
+* netinfo
+* RTT（Round Trip Time）一个连接的往返时间，即数据发送时刻到接收到确认的时刻的差值
+* navigator.sendBeacon() 方法可用于通过 HTTP 将少量数据异步传输到 web 服务器
+
+##  可视化
+
+* 设备占比
+* 浏览器占比
+* pv uv 停留时间
+* pv 增长情况
+* SLS
+
+## 报警
+
+设置各种条件触发邮件，短信报警
+
+## 开源监控系统
+
+* sentry
+* 灯塔

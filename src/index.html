@@ -8,11 +8,11 @@
 <body>
   <div id="container">
     <div class="content">
-      <input type="button" value="点击js报错" onclick="errorClick()">
+      <!-- <input type="button" value="点击js报错" onclick="errorClick()">
       <input type="button" value="点击Promise报错" onclick="promiseErrorClick()">
       <input type="button" value="ajax成功请求" onclick="sendSuccess()">
       <input type="button" value="ajax失败请求" onclick="sendError()">
-      <input type="button" value="ajax abort" onclick="sendAbort()">
+      <input type="button" value="ajax abort" onclick="sendAbort()"> -->
     </div>
   </div>
   <script>
@@ -65,6 +65,15 @@
       xhr.send("type=abort"); 
       xhr.abort();
     }
+
+    setTimeout(()=>{
+      let content = document.getElementsByClassName('content')[0];
+      let h1 = document.createElement('h1');
+      h1.innerHTML = '我是有意义的内容';
+      h1.setAttribute('elementtiming', 'meaningful'); //设置有意义元素
+      content.appendChild(h1);
+    }, 2000)
+
   </script>
   
 </body>
